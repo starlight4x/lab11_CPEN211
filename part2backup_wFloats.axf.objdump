@@ -1,0 +1,416 @@
+
+C:/Users/tony/Desktop/lab11/part2backup_wFloats.axf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <__cs3_interrupt_vector>:
+
+_start:
+
+matrix_multiply:
+
+	MOV R0, #0		//define R0 as i=0
+   0:	00000000 	.word	0x00000000
+   4:	3ff00000 	.word	0x3ff00000
+   8:	00000000 	.word	0x00000000
+   c:	40000000 	.word	0x40000000
+  10:	00000000 	.word	0x00000000
+  14:	40080000 	.word	0x40080000
+  18:	00000000 	.word	0x00000000
+  1c:	40100000 	.word	0x40100000
+  20:	00000000 	.word	0x00000000
+  24:	40140000 	.word	0x40140000
+  28:	00000000 	.word	0x00000000
+  2c:	40180000 	.word	0x40180000
+  30:	00000000 	.word	0x00000000
+  34:	401c0000 	.word	0x401c0000
+  38:	00000000 	.word	0x00000000
+  3c:	40200000 	.word	0x40200000
+  40:	00000000 	.word	0x00000000
+  44:	40220000 	.word	0x40220000
+  48:	00000000 	.word	0x00000000
+  4c:	40240000 	.word	0x40240000
+  50:	00000000 	.word	0x00000000
+  54:	40260000 	.word	0x40260000
+  58:	00000000 	.word	0x00000000
+  5c:	40280000 	.word	0x40280000
+  60:	00000000 	.word	0x00000000
+  64:	402a0000 	.word	0x402a0000
+  68:	00000000 	.word	0x00000000
+  6c:	402c0000 	.word	0x402c0000
+  70:	00000000 	.word	0x00000000
+  74:	402e0000 	.word	0x402e0000
+  78:	00000000 	.word	0x00000000
+  7c:	40300000 	.word	0x40300000
+
+00000080 <array2>:
+  80:	00000000 	.word	0x00000000
+  84:	40300000 	.word	0x40300000
+  88:	00000000 	.word	0x00000000
+  8c:	402e0000 	.word	0x402e0000
+  90:	00000000 	.word	0x00000000
+  94:	402c0000 	.word	0x402c0000
+  98:	00000000 	.word	0x00000000
+  9c:	402a0000 	.word	0x402a0000
+  a0:	00000000 	.word	0x00000000
+  a4:	40280000 	.word	0x40280000
+  a8:	00000000 	.word	0x00000000
+  ac:	40260000 	.word	0x40260000
+  b0:	00000000 	.word	0x00000000
+  b4:	40240000 	.word	0x40240000
+  b8:	00000000 	.word	0x00000000
+  bc:	40220000 	.word	0x40220000
+  c0:	00000000 	.word	0x00000000
+  c4:	40200000 	.word	0x40200000
+  c8:	00000000 	.word	0x00000000
+  cc:	401c0000 	.word	0x401c0000
+  d0:	00000000 	.word	0x00000000
+  d4:	40180000 	.word	0x40180000
+  d8:	00000000 	.word	0x00000000
+  dc:	40140000 	.word	0x40140000
+  e0:	00000000 	.word	0x00000000
+  e4:	40100000 	.word	0x40100000
+  e8:	00000000 	.word	0x00000000
+  ec:	40080000 	.word	0x40080000
+  f0:	00000000 	.word	0x00000000
+  f4:	40000000 	.word	0x40000000
+  f8:	00000000 	.word	0x00000000
+  fc:	3ff00000 	.word	0x3ff00000
+
+00000100 <array_sol>:
+	...
+
+00000180 <N>:
+ 180:	00000004 	.word	0x00000004
+
+00000184 <SUM>:
+	...
+
+0000018c <_start>:
+ 18c:	e3a00000 	mov	r0, #0
+	MOV R1, #0		//define R1 as j=0
+ 190:	e3a01000 	mov	r1, #0
+	MOV R2, #0		//define R2 as k=0
+ 194:	e3a02000 	mov	r2, #0
+	
+	LDR R3, N		//Load N in to R3=128
+ 198:	e51f3020 	ldr	r3, [pc, #-32]	; 180 <N>
+	LDR R4, =array1  //Load R4 as the base of array1
+ 19c:	e59f419c 	ldr	r4, [pc, #412]	; 340 <EVEN3+0x10>
+	LDR R5, =array2  //Load R5 as the base of array2
+ 1a0:	e59f519c 	ldr	r5, [pc, #412]	; 344 <EVEN3+0x14>
+	
+	LDR R7, =SUM
+ 1a4:	e59f719c 	ldr	r7, [pc, #412]	; 348 <EVEN3+0x18>
+ 1a8:	ed976b00 	.word	0xed976b00
+
+000001ac <iloopreturn>:
+	//LDR R6, SUM		//define R6 as sum = 0.0  //NEED TO CHANGE****
+	.word 0xED976B00	//1111, 1101, 1001, 0111, 0110, 1011, 0000, 0000
+iloopreturn:
+	CMP R0, R3
+ 1ac:	e1500003 	cmp	r0, r3
+	BLT iLoop
+ 1b0:	ba000000 	blt	1b8 <iLoop>
+
+000001b4 <done>:
+done:	B done // Finished excution!!!
+ 1b4:	eafffffe 	b	1b4 <done>
+
+000001b8 <iLoop>:
+	
+iLoop:
+	ADD R0, R0, #1
+ 1b8:	e2800001 	add	r0, r0, #1
+
+000001bc <jloopreturn>:
+jloopreturn:
+	CMP R1, R3
+ 1bc:	e1510003 	cmp	r1, r3
+	BLT jLoop
+ 1c0:	ba000002 	blt	1d0 <jLoop>
+	MOV R1, #0
+ 1c4:	e3a01000 	mov	r1, #0
+	MOV R2, #0
+ 1c8:	e3a02000 	mov	r2, #0
+	B iloopreturn  	//if not less then go back to iLoop
+ 1cc:	eafffff6 	b	1ac <iloopreturn>
+
+000001d0 <jLoop>:
+	
+jLoop:
+	ADD R1, R1, #1
+ 1d0:	e2811001 	add	r1, r1, #1
+
+	MOV R6, #0		//Make Sum equals to 0 NEED TO CHANGE*******
+ 1d4:	e3a06000 	mov	r6, #0
+ 1d8:	ee266b06 	.word	0xee266b06
+
+000001dc <kloopreturn>:
+	.word 0xEE266B06	//1111, 1110, 0010, 0110, 0110, 1011, 0000, 0110 
+kloopreturn:
+	CMP R2, R3
+ 1dc:	e1520003 	cmp	r2, r3
+	BLT kLoop
+ 1e0:	ba00000e 	blt	220 <kLoop>
+				//Below code place sum into array3
+	MOV R7, #0		//Clear R7
+ 1e4:	e3a07000 	mov	r7, #0
+	SUB R0, R0, #1
+ 1e8:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 1ec:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 1f0:	e2422001 	sub	r2, r2, #1
+	
+	MUL R7, R0, R3	//Multiply i by N and place in R7
+ 1f4:	e0070390 	mul	r7, r0, r3
+	Add R7, R7, R1	//Add value of R7 to j
+ 1f8:	e0877001 	add	r7, r7, r1
+	
+	ADD R0, R0, #1
+ 1fc:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 200:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 204:	e2822001 	add	r2, r2, #1
+	B EvenOddTest3
+ 208:	ea00003e 	b	308 <EvenOddTest3>
+
+0000020c <Fini3>:
+Fini3:
+	LDR R7, =array_sol
+ 20c:	e59f7138 	ldr	r7, [pc, #312]	; 34c <EVEN3+0x1c>
+	ADD R7, R7, R9
+ 210:	e0877009 	add	r7, r7, r9
+ 214:	ed876b00 	.word	0xed876b00
+	//STR R6, [R7, R9]	//NEED TO CHANGE*******
+	.word 0xED876B00	//1111, 1101, 1000, 0111, 0110, 0000, 0000
+	MOV R2, #0
+ 218:	e3a02000 	mov	r2, #0
+	B jloopreturn	//if not less than go back to jLoop
+ 21c:	eaffffe6 	b	1bc <jloopreturn>
+
+00000220 <kLoop>:
+	
+kLoop:
+	ADD R2, R2, #1
+ 220:	e2822001 	add	r2, r2, #1
+	MOV R7, #0 		//Clear R7
+ 224:	e3a07000 	mov	r7, #0
+	
+	SUB R0, R0, #1
+ 228:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 22c:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 230:	e2422001 	sub	r2, r2, #1
+	MUL R7, R0, R3	//Multiply i by N and place in R7
+ 234:	e0070390 	mul	r7, r0, r3
+	ADD R7, R7, R2  //Add value of R7 to k
+ 238:	e0877002 	add	r7, r7, r2
+	
+	ADD R0, R0, #1
+ 23c:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 240:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 244:	e2822001 	add	r2, r2, #1
+	B EvenOddTest1
+ 248:	ea000012 	b	298 <EvenOddTest1>
+
+0000024c <Fini1>:
+	
+Fini1:
+	//MOV R7, #0		//Clear R7
+	//ADD R7, R4, R9  //Obtain final address of element in array1
+	//LDR R11, [R4, R9]	//place that element in R11********
+	ADD R7, R4, R9
+ 24c:	e0847009 	add	r7, r4, r9
+ 250:	ed97bb00 	.word	0xed97bb00
+	.word 0xED97BB00	//1111, 1101, 1001, 0111, 1011, 1011, 0000, 0000	
+
+	MOV R7, #0      //Clear R7
+ 254:	e3a07000 	mov	r7, #0
+	
+	SUB R0, R0, #1
+ 258:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 25c:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 260:	e2422001 	sub	r2, r2, #1
+	MUl R7, R2, R3  //Multiply k by N and place in R7
+ 264:	e0070392 	mul	r7, r2, r3
+	ADD R7, R7, R1	//Add value of R7 to j
+ 268:	e0877001 	add	r7, r7, r1
+	
+	ADD R0, R0, #1
+ 26c:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 270:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 274:	e2822001 	add	r2, r2, #1
+	B EvenOddTest2
+ 278:	ea000014 	b	2d0 <EvenOddTest2>
+
+0000027c <Fini2>:
+Fini2:
+	//MOV R7, #0		//Clear R7
+	//ADD R7, R5, R9  //Obtain final address of element in array1
+	//LDR R12, [R5, R9]	//place that element in R12
+	ADD R7, R5, R9
+ 27c:	e0857009 	add	r7, r5, r9
+ 280:	ed97cb00 	.word	0xed97cb00
+	.word 0xED97CB00	//1111, 1101, 1001, 0111, 1100, 1011, 0000, 0000
+	B SumCalc
+ 284:	eaffffff 	b	288 <SumCalc>
+
+00000288 <SumCalc>:
+	
+SumCalc:
+	MOV R10, #0 	//Clear R12
+ 288:	e3a0a000 	mov	r10, #0
+ 28c:	ee2bab0c 	.word	0xee2bab0c
+ 290:	ee36ab06 	.word	0xee36ab06
+	.word 0xEE2BAB0C
+	//ADD R6, R6, R10 	//ADD sum to R10 and place as sum NEED TO CHANGE*******
+	.word 0xEE36AB06
+	//LDR r11, = LEDR_BASE
+	//STR r6, [r11]
+	B kloopreturn
+ 294:	eaffffd0 	b	1dc <kloopreturn>
+
+00000298 <EvenOddTest1>:
+	
+//================================================================	
+EvenOddTest1:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 298:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 29c:	e3a09000 	mov	r9, #0
+
+	TST R7, #1
+ 2a0:	e3170001 	tst	r7, #1
+	BNE ODD1
+ 2a4:	1a000000 	bne	2ac <ODD1>
+	B EVEN1
+ 2a8:	ea000004 	b	2c0 <EVEN1>
+
+000002ac <ODD1>:
+
+ODD1:
+	LSR R7, #1
+ 2ac:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2b0:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2b4:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 2b8:	e2899008 	add	r9, r9, #8
+	B Fini1
+ 2bc:	eaffffe2 	b	24c <Fini1>
+
+000002c0 <EVEN1>:
+	
+EVEN1:
+	LSR R7, #1
+ 2c0:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2c4:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2c8:	e0090a97 	mul	r9, r7, r10
+	B Fini1
+ 2cc:	eaffffde 	b	24c <Fini1>
+
+000002d0 <EvenOddTest2>:
+//	ADD R8, R8, #8
+//	MOV R9, R8
+//	B Fini1
+//===============================================================	
+EvenOddTest2:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 2d0:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 2d4:	e3a09000 	mov	r9, #0
+	
+	TST R7, #1
+ 2d8:	e3170001 	tst	r7, #1
+	BNE ODD2
+ 2dc:	1a000000 	bne	2e4 <ODD2>
+	B EVEN2
+ 2e0:	ea000004 	b	2f8 <EVEN2>
+
+000002e4 <ODD2>:
+
+ODD2:
+	LSR R7, #1
+ 2e4:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2e8:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2ec:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 2f0:	e2899008 	add	r9, r9, #8
+	B Fini2
+ 2f4:	eaffffe0 	b	27c <Fini2>
+
+000002f8 <EVEN2>:
+	
+EVEN2:
+	LSR R7, #1
+ 2f8:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2fc:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 300:	e0090a97 	mul	r9, r7, r10
+	B Fini2
+ 304:	eaffffdc 	b	27c <Fini2>
+
+00000308 <EvenOddTest3>:
+//	MOV R9, R8
+//	B Fini2
+
+//===============================================================	
+	EvenOddTest3:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 308:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 30c:	e3a09000 	mov	r9, #0
+
+	TST R7, #1
+ 310:	e3170001 	tst	r7, #1
+	BNE ODD3
+ 314:	1a000000 	bne	31c <ODD3>
+	B EVEN3
+ 318:	ea000004 	b	330 <EVEN3>
+
+0000031c <ODD3>:
+	
+ODD3:
+	LSR R7, #1
+ 31c:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 320:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 324:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 328:	e2899008 	add	r9, r9, #8
+	B Fini3
+ 32c:	eaffffb6 	b	20c <Fini3>
+
+00000330 <EVEN3>:
+	
+EVEN3:
+	LSR R7, #1
+ 330:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 334:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 338:	e0090a97 	mul	r9, r7, r10
+	B Fini3
+ 33c:	eaffffb2 	b	20c <Fini3>
+ 340:	00000000 	.word	0x00000000
+ 344:	00000080 	.word	0x00000080
+ 348:	00000184 	.word	0x00000184
+ 34c:	00000100 	.word	0x00000100

@@ -1,0 +1,399 @@
+
+C:/Users/tony/Desktop/lab11/Lab11part2.axf:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <__cs3_interrupt_vector>:
+
+_start:
+
+matrix_multiply:
+
+	MOV R0, #0		//define R0 as i=0
+   0:	00000001 	.word	0x00000001
+   4:	00000000 	.word	0x00000000
+   8:	00000002 	.word	0x00000002
+   c:	00000000 	.word	0x00000000
+  10:	00000003 	.word	0x00000003
+  14:	00000000 	.word	0x00000000
+  18:	00000004 	.word	0x00000004
+  1c:	00000000 	.word	0x00000000
+  20:	00000005 	.word	0x00000005
+  24:	00000000 	.word	0x00000000
+  28:	00000006 	.word	0x00000006
+  2c:	00000000 	.word	0x00000000
+  30:	00000007 	.word	0x00000007
+  34:	00000000 	.word	0x00000000
+  38:	00000008 	.word	0x00000008
+  3c:	00000000 	.word	0x00000000
+  40:	00000009 	.word	0x00000009
+  44:	00000000 	.word	0x00000000
+  48:	0000000a 	.word	0x0000000a
+  4c:	00000000 	.word	0x00000000
+  50:	0000000b 	.word	0x0000000b
+  54:	00000000 	.word	0x00000000
+  58:	0000000c 	.word	0x0000000c
+  5c:	00000000 	.word	0x00000000
+  60:	0000000d 	.word	0x0000000d
+  64:	00000000 	.word	0x00000000
+  68:	0000000e 	.word	0x0000000e
+  6c:	00000000 	.word	0x00000000
+  70:	0000000f 	.word	0x0000000f
+  74:	00000000 	.word	0x00000000
+  78:	00000010 	.word	0x00000010
+  7c:	00000000 	.word	0x00000000
+
+00000080 <array2>:
+  80:	00000010 	.word	0x00000010
+  84:	00000000 	.word	0x00000000
+  88:	0000000f 	.word	0x0000000f
+  8c:	00000000 	.word	0x00000000
+  90:	0000000e 	.word	0x0000000e
+  94:	00000000 	.word	0x00000000
+  98:	0000000d 	.word	0x0000000d
+  9c:	00000000 	.word	0x00000000
+  a0:	0000000c 	.word	0x0000000c
+  a4:	00000000 	.word	0x00000000
+  a8:	0000000b 	.word	0x0000000b
+  ac:	00000000 	.word	0x00000000
+  b0:	0000000a 	.word	0x0000000a
+  b4:	00000000 	.word	0x00000000
+  b8:	00000009 	.word	0x00000009
+  bc:	00000000 	.word	0x00000000
+  c0:	00000008 	.word	0x00000008
+  c4:	00000000 	.word	0x00000000
+  c8:	00000007 	.word	0x00000007
+  cc:	00000000 	.word	0x00000000
+  d0:	00000006 	.word	0x00000006
+  d4:	00000000 	.word	0x00000000
+  d8:	00000005 	.word	0x00000005
+  dc:	00000000 	.word	0x00000000
+  e0:	00000004 	.word	0x00000004
+  e4:	00000000 	.word	0x00000000
+  e8:	00000003 	.word	0x00000003
+  ec:	00000000 	.word	0x00000000
+  f0:	00000002 	.word	0x00000002
+  f4:	00000000 	.word	0x00000000
+  f8:	00000001 	.word	0x00000001
+  fc:	00000000 	.word	0x00000000
+
+00000100 <array_sol>:
+	...
+
+00000180 <N>:
+ 180:	00000004 	.word	0x00000004
+
+00000184 <SUM>:
+ 184:	00000000 	.word	0x00000000
+
+00000188 <_start>:
+ 188:	e3a00000 	mov	r0, #0
+	MOV R1, #0		//define R1 as j=0
+ 18c:	e3a01000 	mov	r1, #0
+	MOV R2, #0		//define R2 as k=0
+ 190:	e3a02000 	mov	r2, #0
+	
+	LDR R3, N		//Load N in to R3=128
+ 194:	e51f301c 	ldr	r3, [pc, #-28]	; 180 <N>
+	LDR R4, =array1  //Load R4 as the base of array1
+ 198:	e59f4188 	ldr	r4, [pc, #392]	; 328 <EVEN3+0x10>
+	LDR R5, =array2  //Load R5 as the base of array2
+ 19c:	e59f5188 	ldr	r5, [pc, #392]	; 32c <EVEN3+0x14>
+	
+	LDR R6, SUM		//define R4 as sum = 0.0  //NEED TO CHANGE****
+ 1a0:	e51f6024 	ldr	r6, [pc, #-36]	; 184 <SUM>
+
+000001a4 <iloopreturn>:
+iloopreturn:
+	CMP R0, R3
+ 1a4:	e1500003 	cmp	r0, r3
+	BLT iLoop
+ 1a8:	ba000000 	blt	1b0 <iLoop>
+
+000001ac <done>:
+done:	B done // Finished excution!!!
+ 1ac:	eafffffe 	b	1ac <done>
+
+000001b0 <iLoop>:
+	
+iLoop:
+	ADD R0, R0, #1
+ 1b0:	e2800001 	add	r0, r0, #1
+
+000001b4 <jloopreturn>:
+jloopreturn:
+	CMP R1, R3
+ 1b4:	e1510003 	cmp	r1, r3
+	BLT jLoop
+ 1b8:	ba000002 	blt	1c8 <jLoop>
+	MOV R1, #0
+ 1bc:	e3a01000 	mov	r1, #0
+	MOV R2, #0
+ 1c0:	e3a02000 	mov	r2, #0
+	B iloopreturn  	//if not less then go back to iLoop
+ 1c4:	eafffff6 	b	1a4 <iloopreturn>
+
+000001c8 <jLoop>:
+	
+jLoop:
+	ADD R1, R1, #1
+ 1c8:	e2811001 	add	r1, r1, #1
+	MOV R6, #0		//Make Sum equals to 0 NEED TO CHANGE*******
+ 1cc:	e3a06000 	mov	r6, #0
+
+000001d0 <kloopreturn>:
+kloopreturn:
+	CMP R2, R3
+ 1d0:	e1520003 	cmp	r2, r3
+	BLT kLoop
+ 1d4:	ba00000d 	blt	210 <kLoop>
+					//Below code place sum into array3
+	MOV R7, #0		//Clear R7
+ 1d8:	e3a07000 	mov	r7, #0
+	SUB R0, R0, #1
+ 1dc:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 1e0:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 1e4:	e2422001 	sub	r2, r2, #1
+	
+	MUL R7, R0, R3	//Multiply i by N and place in R7
+ 1e8:	e0070390 	mul	r7, r0, r3
+	Add R7, R7, R1	//Add value of R7 to j
+ 1ec:	e0877001 	add	r7, r7, r1
+	
+	ADD R0, R0, #1
+ 1f0:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 1f4:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 1f8:	e2822001 	add	r2, r2, #1
+	B EvenOddTest3
+ 1fc:	ea00003b 	b	2f0 <EvenOddTest3>
+
+00000200 <Fini3>:
+Fini3:
+	LDR R7, =array_sol
+ 200:	e59f7128 	ldr	r7, [pc, #296]	; 330 <EVEN3+0x18>
+	STR R6, [R7, R9]	//NEED TO CHANGE*******
+ 204:	e7876009 	str	r6, [r7, r9]
+	MOV R2, #0
+ 208:	e3a02000 	mov	r2, #0
+	B jloopreturn	//if not less than go back to jLoop
+ 20c:	eaffffe8 	b	1b4 <jloopreturn>
+
+00000210 <kLoop>:
+	
+kLoop:
+	ADD R2, R2, #1
+ 210:	e2822001 	add	r2, r2, #1
+	MOV R7, #0 		//Clear R7
+ 214:	e3a07000 	mov	r7, #0
+	
+	SUB R0, R0, #1
+ 218:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 21c:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 220:	e2422001 	sub	r2, r2, #1
+	MUL R7, R0, R3	//Multiply i by N and place in R7
+ 224:	e0070390 	mul	r7, r0, r3
+	ADD R7, R7, R2  //Add value of R7 to k
+ 228:	e0877002 	add	r7, r7, r2
+	
+	ADD R0, R0, #1
+ 22c:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 230:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 234:	e2822001 	add	r2, r2, #1
+	B EvenOddTest1
+ 238:	ea000010 	b	280 <EvenOddTest1>
+
+0000023c <Fini1>:
+	
+Fini1:
+	//MOV R7, #0		//Clear R7
+	//ADD R7, R4, R9  //Obtain final address of element in array1
+	LDR R11, [R4, R9]	//place that element in R11********
+ 23c:	e794b009 	ldr	r11, [r4, r9]
+
+	MOV R7, #0      //Clear R7
+ 240:	e3a07000 	mov	r7, #0
+	
+	SUB R0, R0, #1
+ 244:	e2400001 	sub	r0, r0, #1
+	SUB R1, R1, #1
+ 248:	e2411001 	sub	r1, r1, #1
+	SUB R2, R2, #1
+ 24c:	e2422001 	sub	r2, r2, #1
+	MUl R7, R2, R3  //Multiply k by N and place in R7
+ 250:	e0070392 	mul	r7, r2, r3
+	ADD R7, R7, R1	//Add value of R7 to j
+ 254:	e0877001 	add	r7, r7, r1
+	
+	ADD R0, R0, #1
+ 258:	e2800001 	add	r0, r0, #1
+	ADD R1, R1, #1
+ 25c:	e2811001 	add	r1, r1, #1
+	ADD R2, R2, #1
+ 260:	e2822001 	add	r2, r2, #1
+	B EvenOddTest2
+ 264:	ea000013 	b	2b8 <EvenOddTest2>
+
+00000268 <Fini2>:
+Fini2:
+	//MOV R7, #0		//Clear R7
+	//ADD R7, R5, R9  //Obtain final address of element in array1
+	LDR R12, [R5, R9]	//place that element in R12
+ 268:	e795c009 	ldr	r12, [r5, r9]
+	B SumCalc
+ 26c:	eaffffff 	b	270 <SumCalc>
+
+00000270 <SumCalc>:
+	
+SumCalc:
+	MOV R10, #0 	//Clear R12
+ 270:	e3a0a000 	mov	r10, #0
+	MUL R10, R11, R12 //Multiple R10 and R11 (element of two arrays) NEED TO CHANGE*******
+ 274:	e00a0c9b 	mul	r10, r11, r12
+	ADD R6, R6, R10 	//ADD sum to R10 and place as sum NEED TO CHANGE*******
+ 278:	e086600a 	add	r6, r6, r10
+	//LDR r11, = LEDR_BASE
+	//STR r6, [r11]
+	B kloopreturn
+ 27c:	eaffffd3 	b	1d0 <kloopreturn>
+
+00000280 <EvenOddTest1>:
+	
+//================================================================	
+EvenOddTest1:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 280:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 284:	e3a09000 	mov	r9, #0
+
+	TST R7, #1
+ 288:	e3170001 	tst	r7, #1
+	BNE ODD1
+ 28c:	1a000000 	bne	294 <ODD1>
+	B EVEN1
+ 290:	ea000004 	b	2a8 <EVEN1>
+
+00000294 <ODD1>:
+
+ODD1:
+	LSR R7, #1
+ 294:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 298:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 29c:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 2a0:	e2899008 	add	r9, r9, #8
+	B Fini1
+ 2a4:	eaffffe4 	b	23c <Fini1>
+
+000002a8 <EVEN1>:
+	
+EVEN1:
+	LSR R7, #1
+ 2a8:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2ac:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2b0:	e0090a97 	mul	r9, r7, r10
+	B Fini1
+ 2b4:	eaffffe0 	b	23c <Fini1>
+
+000002b8 <EvenOddTest2>:
+//	ADD R8, R8, #8
+//	MOV R9, R8
+//	B Fini1
+//===============================================================	
+EvenOddTest2:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 2b8:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 2bc:	e3a09000 	mov	r9, #0
+	
+	TST R7, #1
+ 2c0:	e3170001 	tst	r7, #1
+	BNE ODD2
+ 2c4:	1a000000 	bne	2cc <ODD2>
+	B EVEN2
+ 2c8:	ea000004 	b	2e0 <EVEN2>
+
+000002cc <ODD2>:
+
+ODD2:
+	LSR R7, #1
+ 2cc:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2d0:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2d4:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 2d8:	e2899008 	add	r9, r9, #8
+	B Fini2
+ 2dc:	eaffffe1 	b	268 <Fini2>
+
+000002e0 <EVEN2>:
+	
+EVEN2:
+	LSR R7, #1
+ 2e0:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 2e4:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 2e8:	e0090a97 	mul	r9, r7, r10
+	B Fini2
+ 2ec:	eaffffdd 	b	268 <Fini2>
+
+000002f0 <EvenOddTest3>:
+//	MOV R9, R8
+//	B Fini2
+
+//===============================================================	
+	EvenOddTest3:	
+	MOV R8, #0		//Tracks number of Right shifts
+ 2f0:	e3a08000 	mov	r8, #0
+	MOV R9, #0		//This will be the actual address
+ 2f4:	e3a09000 	mov	r9, #0
+
+	TST R7, #1
+ 2f8:	e3170001 	tst	r7, #1
+	BNE ODD3
+ 2fc:	1a000000 	bne	304 <ODD3>
+	B EVEN3
+ 300:	ea000004 	b	318 <EVEN3>
+
+00000304 <ODD3>:
+	
+ODD3:
+	LSR R7, #1
+ 304:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 308:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 30c:	e0090a97 	mul	r9, r7, r10
+	ADD R9, R9, #8
+ 310:	e2899008 	add	r9, r9, #8
+	B Fini3
+ 314:	eaffffb9 	b	200 <Fini3>
+
+00000318 <EVEN3>:
+	
+EVEN3:
+	LSR R7, #1
+ 318:	e1a070a7 	lsr	r7, r7, #1
+	MOV R10, #16
+ 31c:	e3a0a010 	mov	r10, #16
+	MUL R9, R7, R10
+ 320:	e0090a97 	mul	r9, r7, r10
+	B Fini3
+ 324:	eaffffb5 	b	200 <Fini3>
+ 328:	00000000 	.word	0x00000000
+ 32c:	00000080 	.word	0x00000080
+ 330:	00000100 	.word	0x00000100
